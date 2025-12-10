@@ -24,7 +24,7 @@ public class UpdateChecker {
         return getInstance().getMessage();
     }
     public String getResourceID() {
-        return String.valueOf(115479);
+        return String.valueOf(130629);
     }
     public void getUpdate(Player player) {
         if (!player.hasPermission("replant.event.join.update"))return;
