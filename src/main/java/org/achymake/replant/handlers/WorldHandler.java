@@ -15,6 +15,8 @@ import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
+
 public class WorldHandler {
     private Replant getInstance() {
         return Replant.getInstance();
@@ -39,6 +41,14 @@ public class WorldHandler {
             world.addEntity(item);
             return item;
         } else return null;
+    }
+    public void dropItems(Location location, List<ItemStack> itemStacks) {
+        var world = location.getWorld();
+        if (world != null) {
+            for (var itemStack : itemStacks) {
+                spawnItem(location, itemStack);
+            }
+        }
     }
     public void playSound(Location location, String soundType, double volume, double pitch) {
         var world = location.getWorld();

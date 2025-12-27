@@ -10,7 +10,7 @@ public class RandomHandler {
         return 1.0 - getRandom().nextDouble(1.0);
     }
     private double getRandomDouble(double random) {
-        return random - getRandom().nextDouble(0.01, random);
+        return getRandom().nextDouble(0.01, random);
     }
     public boolean isTrue(double chance) {
         return chance >= getRandomDouble();

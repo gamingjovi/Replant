@@ -21,6 +21,7 @@ blocks:
       melon:
         type: MELON
         fortune-able: false
+        chance: 1.0
         amount:
           min: 3
           max: 7
@@ -35,6 +36,7 @@ blocks:
       pumpkin:
         type: PUMPKIN
         fortune-able: false
+        chance: 1.0
         amount: 1
     experience:
       enable: true
@@ -47,7 +49,8 @@ blocks:
     drops:
       carrot:
         type: CARROT
-        fortune-able: false
+        fortune-able: true
+        chance: 1.0
         amount:
           min: 2
           max: 5
@@ -62,7 +65,15 @@ blocks:
     drops:
       potato:
         type: POTATO
-        fortune-able: false
+        fortune-able: true
+        chance: 1.0
+        amount:
+          min: 2
+          max: 5
+      poisonous_potato:
+        type: POTATO
+        fortune-able: true
+        chance: 0.2
         amount:
           min: 2
           max: 5
@@ -78,10 +89,12 @@ blocks:
       wheat:
         type: WHEAT
         fortune-able: false
+        chance: 1.0
         amount: 1
       wheat_seeds:
         type: WHEAT_SEEDS
         fortune-able: true
+        chance: 1.0
         amount:
           min: 1
           max: 3
@@ -97,10 +110,12 @@ blocks:
       beetroot:
         type: BEETROOT
         fortune-able: false
+        chance: 1.0
         amount: 1
       beetroot_seeds:
         type: BEETROOT_SEEDS
         fortune-able: true
+        chance: 1.0
         amount:
           min: 1
           max: 3
@@ -116,6 +131,7 @@ blocks:
       cocoa_beans:
         type: COCOA_BEANS
         fortune-able: false
+        chance: 1.0
         amount:
           min: 1
           max: 2
@@ -131,6 +147,7 @@ blocks:
       nether_wart:
         type: NETHER_WART
         fortune-able: false
+        chance: 1.0
         amount:
           min: 1
           max: 3

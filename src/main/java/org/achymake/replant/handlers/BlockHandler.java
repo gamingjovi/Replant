@@ -49,45 +49,42 @@ public class BlockHandler {
         var section = getConfig().getConfigurationSection("blocks." + material + ".drops");
         if (section != null) {
             section.getKeys(false).forEach(drop -> {
-                var materialName = section.getString(drop + ".type");
-                if (materialName != null) {
-                    if (section.isInt(drop + ".amount")) {
-                        var amount = section.getInt(drop + ".amount");
-                        if (section.getBoolean(drop + ".fortune-able")) {
-                            if (fortune > 0) {
-                                if (!getRandomHandler().isTrue(0.5, fortune)) {
-                                    var extra = getRandomHandler().nextInt(0, fortune);
-                                    if (extra > 0) {
-                                        listed.add(getMaterials().getItemStack(materialName, extra));
+                var chance = section.getDouble(drop + ".chance");
+                if (getRandomHandler().isTrue(chance)) {
+                    var materialName = section.getString(drop + ".type");
+                    if (materialName != null) {
+                        if (section.isInt(drop + ".amount")) {
+                            var amount = section.getInt(drop + ".amount");
+                            if (section.getBoolean(drop + ".fortune-able")) {
+                                if (fortune > 0) {
+                                    if (!getRandomHandler().isTrue(0.5, fortune)) {
+                                        var extra = getRandomHandler().nextInt(0, fortune);
+                                        if (extra > 0) {
+                                            listed.add(getMaterials().getItemStack(materialName, extra));
+                                        } else listed.add(getMaterials().getItemStack(materialName, amount));
                                     } else listed.add(getMaterials().getItemStack(materialName, amount));
                                 } else listed.add(getMaterials().getItemStack(materialName, amount));
                             } else listed.add(getMaterials().getItemStack(materialName, amount));
-                        } else listed.add(getMaterials().getItemStack(materialName, amount));
-                    } else {
-                        var min = section.getInt(drop + ".amount.min");
-                        var max = section.getInt(drop + ".amount.max");
-                        var amount = getRandomHandler().nextInt(min, max);
-                        if (section.getBoolean(drop + ".fortune-able")) {
-                            if (fortune > 0) {
-                                if (!getRandomHandler().isTrue(0.5, fortune)) {
-                                    var extra = getRandomHandler().nextInt(0, fortune);
-                                    if (extra > 0) {
-                                        listed.add(getMaterials().getItemStack(materialName, extra));
+                        } else {
+                            var min = section.getInt(drop + ".amount.min");
+                            var max = section.getInt(drop + ".amount.max");
+                            var amount = getRandomHandler().nextInt(min, max);
+                            if (section.getBoolean(drop + ".fortune-able")) {
+                                if (fortune > 0) {
+                                    if (!getRandomHandler().isTrue(0.5, fortune)) {
+                                        var extra = getRandomHandler().nextInt(0, fortune);
+                                        if (extra > 0) {
+                                            listed.add(getMaterials().getItemStack(materialName, extra));
+                                        } else listed.add(getMaterials().getItemStack(materialName, amount));
                                     } else listed.add(getMaterials().getItemStack(materialName, amount));
                                 } else listed.add(getMaterials().getItemStack(materialName, amount));
                             } else listed.add(getMaterials().getItemStack(materialName, amount));
-                        } else listed.add(getMaterials().getItemStack(materialName, amount));
+                        }
                     }
                 }
             });
         }
         return listed;
-    }
-    public void dropItems(Block block, ItemStack heldItem) {
-        var fortune = heldItem.getEnchantmentLevel(getMaterials().getEnchantment("fortune"));
-        var material = block.getType();
-        var location = block.getLocation().add(0.5,0.3,0.5);
-        getDrops(material, fortune).forEach(itemStack -> getWorldHandler().spawnItem(location, itemStack));
     }
     public void dropExperience(Block block) {
         var material = block.getType();

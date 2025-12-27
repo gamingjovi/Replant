@@ -4,6 +4,7 @@ import org.achymake.replant.Replant;
 import org.achymake.replant.events.PlayerReplantEvent;
 import org.achymake.replant.handlers.BlockHandler;
 import org.achymake.replant.handlers.MaterialHandler;
+import org.achymake.replant.handlers.WorldHandler;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
@@ -24,6 +25,9 @@ public class PlayerReplant implements Listener {
     private MaterialHandler getMaterials() {
         return getInstance().getMaterialHandler();
     }
+    private WorldHandler getWorldHandler() {
+        return getInstance().getWorldHandler();
+    }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();
     }
@@ -39,26 +43,13 @@ public class PlayerReplant implements Listener {
         var heldItem = player.getInventory().getItemInMainHand();
         var damage = getConfig().getInt("blocks." + block.getType() + ".damage");
         if (getMaterials().isHoe(heldItem)) {
-            if (getMaterials().isWoodenHoe(heldItem)) {
-                if (!player.hasPermission("replant.event.replant.wooden_hoe"))return;
-            } else if (getMaterials().isStoneHoe(heldItem)) {
-                if (!player.hasPermission("replant.event.replant.stone_hoe"))return;
-            } else if (getMaterials().isIronHoe(heldItem)) {
-                if (!player.hasPermission("replant.event.replant.iron_hoe"))return;
-            } else if (getMaterials().isGoldenHoe(heldItem)) {
-                if (!player.hasPermission("replant.event.replant.golden_hoe"))return;
-            } else if (getMaterials().isDiamondHoe(heldItem)) {
-                if (!player.hasPermission("replant.event.replant.diamond_hoe"))return;
-            } else if (getMaterials().isNetheriteHoe(heldItem)) {
-                if (!player.hasPermission("replant.event.replant.netherite_hoe"))return;
-            }
             if (player.getGameMode().equals(GameMode.SURVIVAL)) {
                 getMaterials().addDamage(heldItem, damage);
             }
-        } else if (!player.hasPermission("replant.event.replant.hand"))return;
+        }
         player.swingMainHand();
         getBlockHandler().playSound(block);
-        getBlockHandler().dropItems(block, heldItem);
+        getWorldHandler().dropItems(block.getLocation().add(0.5, 0.3, 0.5), event.getDrops());
         getBlockHandler().dropExperience(block);
         getBlockHandler().resetAge(block);
         if (getMaterials().isHoe(heldItem)) {
