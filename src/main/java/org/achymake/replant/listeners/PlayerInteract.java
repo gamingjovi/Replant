@@ -46,13 +46,13 @@ public class PlayerInteract implements Listener {
         var player = event.getPlayer();
         if (player.getGameMode().equals(GameMode.SPECTATOR))return;
         var heldItem = player.getInventory().getItemInMainHand();
-        var fortune = heldItem.getEnchantmentLevel(getMaterials().getEnchantment("fortune"));
         if (getMaterials().isHoe(heldItem)) {
             if (!player.hasPermission("replant.event.replant.hoe"))return;
             if (!getMaterials().hasEnchantment(heldItem))return;
         } else if (!player.hasPermission("replant.event.replant.hand"))return;
         event.setUseItemInHand(Event.Result.DENY);
         event.setUseInteractedBlock(Event.Result.ALLOW);
+        var fortune = heldItem.getEnchantmentLevel(getMaterials().getEnchantment("fortune"));
         var drops = getBlockHandler().getDrops(block.getType(), fortune);
         getPluginManager().callEvent(new PlayerReplantEvent(player, block, drops));
     }

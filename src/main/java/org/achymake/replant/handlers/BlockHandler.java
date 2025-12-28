@@ -59,7 +59,7 @@ public class BlockHandler {
                                 if (fortune > 0) {
                                     if (!getRandomHandler().isTrue(0.5, fortune)) {
                                         var extra = getRandomHandler().nextInt(1, fortune + 1);
-                                        listed.add(getMaterials().getItemStack(materialName, extra));
+                                        listed.add(getMaterials().getItemStack(materialName, amount + extra));
                                     } else listed.add(getMaterials().getItemStack(materialName, amount));
                                 } else listed.add(getMaterials().getItemStack(materialName, amount));
                             } else listed.add(getMaterials().getItemStack(materialName, amount));
@@ -71,7 +71,7 @@ public class BlockHandler {
                                 if (fortune > 0) {
                                     if (!getRandomHandler().isTrue(0.5, fortune)) {
                                         var extra = getRandomHandler().nextInt(1, fortune + 1);
-                                        listed.add(getMaterials().getItemStack(materialName, extra));
+                                        listed.add(getMaterials().getItemStack(materialName, amount + extra));
                                     } else listed.add(getMaterials().getItemStack(materialName, amount));
                                 } else listed.add(getMaterials().getItemStack(materialName, amount));
                             } else listed.add(getMaterials().getItemStack(materialName, amount));
