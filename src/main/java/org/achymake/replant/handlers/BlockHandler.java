@@ -82,15 +82,6 @@ public class BlockHandler {
         }
         return listed;
     }
-    public void dropExperience(Block block) {
-        var material = block.getType();
-        var section = getConfig().getConfigurationSection("blocks." + material + ".experience");
-        if (section == null)return;
-        if (!section.getBoolean("enable"))return;
-        if (!getRandomHandler().isTrue(section.getDouble("chance")))return;
-        var location = block.getLocation().add(0.5, 0.3, 0.5);
-        getWorldHandler().spawnExperience(location, section.getInt("amount"));
-    }
     public void resetAge(Block block) {
         if (block.getBlockData() instanceof Ageable ageable) {
             ageable.setAge(0);

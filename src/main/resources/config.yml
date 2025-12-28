@@ -25,10 +25,6 @@ blocks:
         amount:
           min: 3
           max: 7
-    experience:
-      enable: true
-      chance: 0.30
-      amount: 1
   PUMPKIN:
     enable: false
     damage: 1
@@ -38,10 +34,6 @@ blocks:
         fortune-able: false
         chance: 1.0
         amount: 1
-    experience:
-      enable: true
-      chance: 0.30
-      amount: 1
   CARROTS:
     enable: true
     max-age: 7
@@ -54,10 +46,6 @@ blocks:
         amount:
           min: 2
           max: 5
-    experience:
-      enable: true
-      chance: 0.30
-      amount: 1
   POTATOES:
     enable: true
     max-age: 7
@@ -75,10 +63,6 @@ blocks:
         fortune-able: false
         chance: 0.02
         amount: 1
-    experience:
-      enable: true
-      chance: 0.30
-      amount: 1
   WHEAT:
     enable: true
     max-age: 7
@@ -96,10 +80,6 @@ blocks:
         amount:
           min: 1
           max: 4
-    experience:
-      enable: true
-      chance: 0.30
-      amount: 1
   BEETROOTS:
     enable: true
     max-age: 3
@@ -117,10 +97,6 @@ blocks:
         amount:
           min: 1
           max: 4
-    experience:
-      enable: true
-      chance: 0.30
-      amount: 1
   COCOA:
     enable: true
     max-age: 2
@@ -131,10 +107,6 @@ blocks:
         fortune-able: false
         chance: 1.0
         amount: 2
-    experience:
-      enable: true
-      chance: 0.30
-      amount: 1
   NETHER_WART:
     enable: true
     max-age: 3
@@ -147,7 +119,3 @@ blocks:
         amount:
           min: 2
           max: 4
-    experience:
-      enable: true
-      chance: 0.30
-      amount: 1

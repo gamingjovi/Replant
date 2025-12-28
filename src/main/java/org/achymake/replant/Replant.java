@@ -59,7 +59,6 @@ public final class Replant extends JavaPlugin {
         new ReplantCommand();
     }
     private void events() {
-        new BlockBreak();
         new PlayerInteract();
         new PlayerJoin();
         new PlayerReplant();

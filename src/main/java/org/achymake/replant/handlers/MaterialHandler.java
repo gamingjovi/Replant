@@ -36,12 +36,6 @@ public class MaterialHandler {
     public Enchantment getEnchantment(String enchantmentName) {
         return Enchantment.getByName(enchantmentName.toUpperCase());
     }
-    public int getEnchantLevel(ItemStack itemStack, String enchantmentName) {
-        return itemStack.getEnchantmentLevel(getEnchantment(enchantmentName));
-    }
-    public boolean isAir(ItemStack itemStack) {
-        return itemStack == null || itemStack.getType().equals(get("air"));
-    }
     public boolean isHoe(ItemStack itemStack) {
         return isWoodenHoe(itemStack) ||
                 isStoneHoe(itemStack) ||

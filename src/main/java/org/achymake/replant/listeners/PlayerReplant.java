@@ -50,7 +50,6 @@ public class PlayerReplant implements Listener {
         player.swingMainHand();
         getBlockHandler().playSound(block);
         getWorldHandler().dropItems(block.getLocation().add(0.5, 0.3, 0.5), event.getDrops());
-        getBlockHandler().dropExperience(block);
         getBlockHandler().resetAge(block);
         if (getMaterials().isHoe(heldItem)) {
             if (getMaterials().isDestroyed(heldItem)) {

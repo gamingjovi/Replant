@@ -7,11 +7,9 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import org.achymake.replant.Replant;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,15 +21,6 @@ public class WorldHandler {
     }
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
-    }
-    public ExperienceOrb spawnExperience(Location location, int amount) {
-        var world = location.getWorld();
-        if (world != null) {
-            var experience = world.createEntity(location, ExperienceOrb.class);
-            experience.setExperience(amount);
-            world.addEntity(experience);
-            return experience;
-        } else return null;
     }
     public Item spawnItem(Location location, ItemStack itemStack) {
         var world = location.getWorld();
@@ -54,11 +43,6 @@ public class WorldHandler {
         var world = location.getWorld();
         if (world == null)return;
         world.playSound(location, Sound.valueOf(soundType), (float) volume, (float) pitch);
-    }
-    public void spawnParticle(Location location, String particleType, int count, double offsetX, double offsetY, double offsetZ) {
-        var world = location.getWorld();
-        if (world == null)return;
-        world.spawnParticle(Particle.valueOf(particleType), location, count, offsetX, offsetY, offsetZ, 0.0);
     }
     public boolean isReplantAllowed(Block block) {
         if (getConfig().getStringList("replant.worlds").contains(block.getWorld().getName())) {
