@@ -72,7 +72,7 @@ public class MaterialHandler {
         var unbreaking = getEnchantment("unbreaking");
         if (itemStack.containsEnchantment(unbreaking)) {
             var lvl = itemStack.getEnchantments().get(unbreaking);
-            if (!getRandomHandler().isTrue(0.6, lvl))return;
+            if (!getRandomHandler().isTrue(0.5, lvl))return;
             var toolHealthDamage = (Damageable) itemStack.getItemMeta();
             var result = toolHealthDamage.getDamage() + damage;
             toolHealthDamage.setDamage(result);

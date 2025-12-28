@@ -71,12 +71,10 @@ blocks:
           min: 2
           max: 5
       poisonous_potato:
-        type: POTATO
-        fortune-able: true
-        chance: 0.2
-        amount:
-          min: 2
-          max: 5
+        type: POISONOUS_POTATO
+        fortune-able: false
+        chance: 0.02
+        amount: 1
     experience:
       enable: true
       chance: 0.30
@@ -97,7 +95,7 @@ blocks:
         chance: 1.0
         amount:
           min: 1
-          max: 3
+          max: 4
     experience:
       enable: true
       chance: 0.30
@@ -118,7 +116,7 @@ blocks:
         chance: 1.0
         amount:
           min: 1
-          max: 3
+          max: 4
     experience:
       enable: true
       chance: 0.30
@@ -132,9 +130,7 @@ blocks:
         type: COCOA_BEANS
         fortune-able: false
         chance: 1.0
-        amount:
-          min: 1
-          max: 2
+        amount: 2
     experience:
       enable: true
       chance: 0.30
@@ -149,8 +145,8 @@ blocks:
         fortune-able: false
         chance: 1.0
         amount:
-          min: 1
-          max: 3
+          min: 2
+          max: 4
     experience:
       enable: true
       chance: 0.30

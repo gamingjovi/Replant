@@ -58,10 +58,8 @@ public class BlockHandler {
                             if (section.getBoolean(drop + ".fortune-able")) {
                                 if (fortune > 0) {
                                     if (!getRandomHandler().isTrue(0.5, fortune)) {
-                                        var extra = getRandomHandler().nextInt(0, fortune);
-                                        if (extra > 0) {
-                                            listed.add(getMaterials().getItemStack(materialName, extra));
-                                        } else listed.add(getMaterials().getItemStack(materialName, amount));
+                                        var extra = getRandomHandler().nextInt(1, fortune + 1);
+                                        listed.add(getMaterials().getItemStack(materialName, extra));
                                     } else listed.add(getMaterials().getItemStack(materialName, amount));
                                 } else listed.add(getMaterials().getItemStack(materialName, amount));
                             } else listed.add(getMaterials().getItemStack(materialName, amount));
@@ -72,10 +70,8 @@ public class BlockHandler {
                             if (section.getBoolean(drop + ".fortune-able")) {
                                 if (fortune > 0) {
                                     if (!getRandomHandler().isTrue(0.5, fortune)) {
-                                        var extra = getRandomHandler().nextInt(0, fortune);
-                                        if (extra > 0) {
-                                            listed.add(getMaterials().getItemStack(materialName, extra));
-                                        } else listed.add(getMaterials().getItemStack(materialName, amount));
+                                        var extra = getRandomHandler().nextInt(1, fortune + 1);
+                                        listed.add(getMaterials().getItemStack(materialName, extra));
                                     } else listed.add(getMaterials().getItemStack(materialName, amount));
                                 } else listed.add(getMaterials().getItemStack(materialName, amount));
                             } else listed.add(getMaterials().getItemStack(materialName, amount));
