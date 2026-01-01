@@ -37,30 +37,52 @@ public class MaterialHandler {
         return Enchantment.getByName(enchantmentName.toUpperCase());
     }
     public boolean isHoe(ItemStack itemStack) {
-        return isWoodenHoe(itemStack) ||
-                isStoneHoe(itemStack) ||
-                isIronHoe(itemStack) ||
-                isGoldenHoe(itemStack) ||
-                isDiamondHoe(itemStack) ||
+        return isWoodenHoe(itemStack) || isStoneHoe(itemStack) ||
+                isCopperHoe(itemStack) || isIronHoe(itemStack) ||
+                isGoldenHoe(itemStack) || isDiamondHoe(itemStack) ||
                 isNetheriteHoe(itemStack);
     }
     public boolean isWoodenHoe(ItemStack itemStack) {
-        return itemStack.getType().equals(get("wooden_hoe"));
+        var material = get("wooden_hoe");
+        if (material != null) {
+            return itemStack.getType().equals(material);
+        } else return false;
     }
     public boolean isStoneHoe(ItemStack itemStack) {
-        return itemStack.getType().equals(get("stone_hoe"));
+        var material = get("stone_hoe");
+        if (material != null) {
+            return itemStack.getType().equals(material);
+        } else return false;
+    }
+    public boolean isCopperHoe(ItemStack itemStack) {
+        var material = get("copper_hoe");
+        if (material != null) {
+            return itemStack.getType().equals(material);
+        } else return false;
     }
     public boolean isIronHoe(ItemStack itemStack) {
-        return itemStack.getType().equals(get("iron_hoe"));
+        var material = get("iron_hoe");
+        if (material != null) {
+            return itemStack.getType().equals(material);
+        } else return false;
     }
     public boolean isGoldenHoe(ItemStack itemStack) {
-        return itemStack.getType().equals(get("golden_hoe"));
+        var material = get("golden_hoe");
+        if (material != null) {
+            return itemStack.getType().equals(material);
+        } else return false;
     }
     public boolean isDiamondHoe(ItemStack itemStack) {
-        return itemStack.getType().equals(get("diamond_hoe"));
+        var material = get("diamond_hoe");
+        if (material != null) {
+            return itemStack.getType().equals(material);
+        } else return false;
     }
     public boolean isNetheriteHoe(ItemStack itemStack) {
-        return itemStack.getType().equals(get("netherite_hoe"));
+        var material = get("netherite_hoe");
+        if (material != null) {
+            return itemStack.getType().equals(material);
+        } else return false;
     }
     public void addDamage(ItemStack itemStack, int damage) {
         var unbreaking = getEnchantment("unbreaking");
@@ -88,6 +110,12 @@ public class MaterialHandler {
         } else if (isStoneHoe(heldItem)) {
             var toolHealthAfter = (Damageable) heldItem.getItemMeta();
             if (toolHealthAfter.getDamage() >= 131) {
+                heldItem.setAmount(0);
+                return true;
+            } else return false;
+        } else if (isCopperHoe(heldItem)) {
+            var toolHealthAfter = (Damageable) heldItem.getItemMeta();
+            if (toolHealthAfter.getDamage() >= 190) {
                 heldItem.setAmount(0);
                 return true;
             } else return false;

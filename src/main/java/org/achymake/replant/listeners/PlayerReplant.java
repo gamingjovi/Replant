@@ -42,16 +42,14 @@ public class PlayerReplant implements Listener {
         var player = event.getPlayer();
         var heldItem = player.getInventory().getItemInMainHand();
         var damage = getConfig().getInt("blocks." + block.getType() + ".damage");
-        if (getMaterials().isHoe(heldItem)) {
-            if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-                getMaterials().addDamage(heldItem, damage);
-            }
-        }
         player.swingMainHand();
         getBlockHandler().playSound(block);
         getWorldHandler().dropItems(block.getLocation().add(0.5, 0.3, 0.5), event.getDrops());
         getBlockHandler().resetAge(block);
         if (getMaterials().isHoe(heldItem)) {
+            if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+                getMaterials().addDamage(heldItem, damage);
+            }
             if (getMaterials().isDestroyed(heldItem)) {
                 getMaterials().breakItem(player.getLocation(), heldItem);
             }

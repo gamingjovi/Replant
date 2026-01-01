@@ -2,6 +2,7 @@ package org.achymake.replant.handlers;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
@@ -18,6 +19,9 @@ import java.util.List;
 public class WorldHandler {
     private Replant getInstance() {
         return Replant.getInstance();
+    }
+    private WorldGuard getWorldGuard() {
+        return getInstance().getWorldGuard();
     }
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
@@ -45,10 +49,14 @@ public class WorldHandler {
         world.playSound(location, Sound.valueOf(soundType), (float) volume, (float) pitch);
     }
     public boolean isReplantAllowed(Block block) {
-        if (getConfig().getStringList("replant.worlds").contains(block.getWorld().getName())) {
-            var regionManager = getInstance().getWorldGuard().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(block.getWorld()));
+        var world = block.getWorld();
+        if (getConfig().getStringList("replant.worlds").contains(world.getName())) {
+            var regionManager = getWorldGuard().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
             if (regionManager != null) {
-                var vector = BlockVector3.at(block.getX(), block.getY(), block.getZ());
+                var x = block.getX();
+                var y = block.getY();
+                var z = block.getZ();
+                var vector = BlockVector3.at(x, y, z);
                 var protectedCuboidRegion = new ProtectedCuboidRegion("_", vector, vector);
                 return isAllowed(regionManager.getApplicableRegions(protectedCuboidRegion));
             } else return true;
@@ -63,7 +71,7 @@ public class WorldHandler {
                 } else if (flag == StateFlag.State.DENY) {
                     return false;
                 }
-            } else return true;
+            }
         }
         return true;
     }
