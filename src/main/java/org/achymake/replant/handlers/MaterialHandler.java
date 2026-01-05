@@ -85,20 +85,15 @@ public class MaterialHandler {
         } else return false;
     }
     public void addDamage(ItemStack itemStack, int damage) {
-        var unbreaking = getEnchantment("unbreaking");
-        if (itemStack.containsEnchantment(unbreaking)) {
-            var lvl = itemStack.getEnchantments().get(unbreaking);
-            if (!getRandomHandler().isTrue(0.5, lvl))return;
-            var toolHealthDamage = (Damageable) itemStack.getItemMeta();
-            var result = toolHealthDamage.getDamage() + damage;
-            toolHealthDamage.setDamage(result);
-            itemStack.setItemMeta(toolHealthDamage);
-        } else {
-            var toolHealthDamage = (Damageable) itemStack.getItemMeta();
-            var result = toolHealthDamage.getDamage() + damage;
-            toolHealthDamage.setDamage(result);
-            itemStack.setItemMeta(toolHealthDamage);
-        }
+        var itemMeta = itemStack.getItemMeta();
+        if (itemMeta == null)return;
+        var unbreaking = itemStack.getEnchantmentLevel(getEnchantment("unbreaking"));
+        var calculated = unbreaking + 1;
+        if (!getRandomHandler().isTrue(1.0 / calculated))return;
+        var toolHealthDamage = (Damageable) itemMeta;
+        var result = toolHealthDamage.getDamage() + damage;
+        toolHealthDamage.setDamage(result);
+        itemStack.setItemMeta(toolHealthDamage);
     }
     public boolean isDestroyed(ItemStack heldItem) {
         if (isWoodenHoe(heldItem)) {
