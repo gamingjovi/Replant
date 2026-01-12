@@ -22,7 +22,7 @@ public class MaterialHandler {
         return getInstance().getWorldHandler();
     }
     public Material get(String materialName) {
-        return Material.valueOf(materialName.toUpperCase());
+        return Material.getMaterial(materialName.toUpperCase());
     }
     public ItemStack getItemStack(String materialName, int amount) {
         return new ItemStack(get(materialName.toUpperCase()), amount);

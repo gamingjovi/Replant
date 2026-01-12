@@ -48,24 +48,24 @@ public class BlockHandler {
         var listed = new ArrayList<ItemStack>();
         var section = getConfig().getConfigurationSection("blocks." + material + ".drops");
         if (section != null) {
-            section.getKeys(false).forEach(drop -> {
-                var chance = section.getDouble(drop + ".chance");
+            for (var key : section.getKeys(false)) {
+                var chance = section.getDouble(key + ".chance");
                 if (getRandomHandler().isTrue(chance)) {
-                    var materialName = section.getString(drop + ".type");
+                    var materialName = section.getString(key + ".type");
                     if (materialName != null) {
-                        if (section.isInt(drop + ".amount")) {
-                            var amount = section.getInt(drop + ".amount");
-                            if (section.getBoolean(drop + ".fortune-able")) {
+                        if (section.isInt(key + ".amount")) {
+                            var amount = section.getInt(key + ".amount");
+                            if (section.getBoolean(key + ".fortune-able")) {
                                 if (getRandomHandler().isTrue(fortune * 0.12)) {
                                     var extra = getRandomHandler().nextInt(1, fortune + 1);
                                     listed.add(getMaterials().getItemStack(materialName, amount + extra));
                                 } else listed.add(getMaterials().getItemStack(materialName, amount));
                             } else listed.add(getMaterials().getItemStack(materialName, amount));
                         } else {
-                            var min = section.getInt(drop + ".amount.min");
-                            var max = section.getInt(drop + ".amount.max");
+                            var min = section.getInt(key + ".amount.min");
+                            var max = section.getInt(key + ".amount.max");
                             var amount = getRandomHandler().nextInt(min, max);
-                            if (section.getBoolean(drop + ".fortune-able")) {
+                            if (section.getBoolean(key + ".fortune-able")) {
                                 if (getRandomHandler().isTrue(fortune * 0.12)) {
                                     var extra = getRandomHandler().nextInt(1, fortune + 1);
                                     listed.add(getMaterials().getItemStack(materialName, amount + extra));
@@ -74,7 +74,7 @@ public class BlockHandler {
                         }
                     }
                 }
-            });
+            }
         }
         return listed;
     }

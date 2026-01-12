@@ -20,11 +20,11 @@ public class WorldHandler {
     private Replant getInstance() {
         return Replant.getInstance();
     }
-    private WorldGuard getWorldGuard() {
-        return getInstance().getWorldGuard();
-    }
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
+    }
+    private WorldGuard getWorldGuard() {
+        return getInstance().getWorldGuard();
     }
     public Item spawnItem(Location location, ItemStack itemStack) {
         var world = location.getWorld();

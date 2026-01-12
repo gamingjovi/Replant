@@ -3,9 +3,9 @@ package org.achymake.replant.listeners;
 import org.achymake.replant.Replant;
 import org.achymake.replant.events.PlayerReplantEvent;
 import org.achymake.replant.handlers.BlockHandler;
+import org.achymake.replant.handlers.GameModeHandler;
 import org.achymake.replant.handlers.MaterialHandler;
 import org.achymake.replant.handlers.WorldHandler;
-import org.bukkit.GameMode;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -22,7 +22,10 @@ public class PlayerReplant implements Listener {
     private BlockHandler getBlockHandler() {
         return getInstance().getBlockHandler();
     }
-    private MaterialHandler getMaterials() {
+    private GameModeHandler getGameModeHandler() {
+        return getInstance().getGameModeHandler();
+    }
+    private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
     private WorldHandler getWorldHandler() {
@@ -46,13 +49,10 @@ public class PlayerReplant implements Listener {
         getBlockHandler().playSound(block);
         getWorldHandler().dropItems(block.getLocation().add(0.5, 0.3, 0.5), event.getDrops());
         getBlockHandler().resetAge(block);
-        if (getMaterials().isHoe(heldItem)) {
-            if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-                getMaterials().addDamage(heldItem, damage);
-            }
-            if (getMaterials().isDestroyed(heldItem)) {
-                getMaterials().breakItem(player.getLocation(), heldItem);
-            }
-        }
+        if (!getMaterialHandler().isHoe(heldItem))return;
+        if (!player.getGameMode().equals(getGameModeHandler().get("survival")))return;
+        getMaterialHandler().addDamage(heldItem, damage);
+        if (!getMaterialHandler().isDestroyed(heldItem))return;
+        getMaterialHandler().breakItem(player.getLocation(), heldItem);
     }
 }

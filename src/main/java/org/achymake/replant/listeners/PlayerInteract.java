@@ -3,9 +3,9 @@ package org.achymake.replant.listeners;
 import org.achymake.replant.Replant;
 import org.achymake.replant.events.PlayerReplantEvent;
 import org.achymake.replant.handlers.BlockHandler;
+import org.achymake.replant.handlers.GameModeHandler;
 import org.achymake.replant.handlers.MaterialHandler;
 import org.achymake.replant.handlers.WorldHandler;
-import org.bukkit.GameMode;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,6 +21,9 @@ public class PlayerInteract implements Listener {
     }
     private BlockHandler getBlockHandler() {
         return getInstance().getBlockHandler();
+    }
+    private GameModeHandler getGameModeHandler() {
+        return getInstance().getGameModeHandler();
     }
     private MaterialHandler getMaterials() {
         return getInstance().getMaterialHandler();
@@ -44,14 +47,14 @@ public class PlayerInteract implements Listener {
         if (!getBlockHandler().isRightAge(block))return;
         if (!getWorldHandler().isReplantAllowed(block))return;
         var player = event.getPlayer();
-        if (player.getGameMode().equals(GameMode.SPECTATOR))return;
+        if (player.getGameMode().equals(getGameModeHandler().get("spectator")))return;
         var heldItem = player.getInventory().getItemInMainHand();
         if (getMaterials().isHoe(heldItem)) {
             if (!player.hasPermission("replant.event.replant.hoe"))return;
             if (!getMaterials().hasEnchantment(heldItem))return;
         } else if (!player.hasPermission("replant.event.replant.hand"))return;
         event.setUseItemInHand(Event.Result.DENY);
-        event.setUseInteractedBlock(Event.Result.ALLOW);
+        event.setUseInteractedBlock(Event.Result.DENY);
         var fortune = heldItem.getEnchantmentLevel(getMaterials().getEnchantment("fortune"));
         var drops = getBlockHandler().getDrops(block.getType(), fortune);
         getPluginManager().callEvent(new PlayerReplantEvent(player, block, drops));

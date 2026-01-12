@@ -16,6 +16,7 @@ public final class Replant extends JavaPlugin {
     private static Replant instance;
     private Message message;
     private BlockHandler blockHandler;
+    private GameModeHandler gameModeHandler;
     private MaterialHandler materialHandler;
     private RandomHandler randomHandler;
     private ScheduleHandler scheduleHandler;
@@ -37,6 +38,7 @@ public final class Replant extends JavaPlugin {
         instance = this;
         message = new Message();
         blockHandler = new BlockHandler();
+        gameModeHandler = new GameModeHandler();
         materialHandler = new MaterialHandler();
         randomHandler = new RandomHandler();
         scheduleHandler = new ScheduleHandler();
@@ -89,6 +91,9 @@ public final class Replant extends JavaPlugin {
     }
     public MaterialHandler getMaterialHandler() {
         return materialHandler;
+    }
+    public GameModeHandler getGameModeHandler() {
+        return gameModeHandler;
     }
     public BlockHandler getBlockHandler() {
         return blockHandler;
