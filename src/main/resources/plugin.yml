@@ -1,65 +1,33 @@
 name: Replant
-version: '${project.version}'
+version: 2.0.1
 main: org.achymake.replant.Replant
-api-version: '1.21'
-prefix: '${project.name}'
-load: STARTUP
-depend:
-  - WorldGuard
-author: AchyMake
-description: '${project.description}'
-website: '${project.url}'
+api-version: "1.21"
+authors: [AchyMake, gamingjovi]
+softdepend: [WorldGuard]
 commands:
   replant:
-    description: replant command
-    permission: replant.command.replant
-    permission-message: You do not have the permissions to execute the command
+    description: Replant main command
+    usage: "/replant <reload|info>"
+    permission: replant.command
 permissions:
-  replant.command.replant:
-    description: replant command
+  replant.use:
+    description: Allows using replant in general
+    default: true
+  replant.use.hand:
+    description: Allows replanting with an empty hand
+    default: true
+  replant.use.hoe:
+    description: Allows replanting with a hoe
+    default: true
+  replant.command:
+    description: Allows /replant
     default: op
-  replant.event.replant:
-    description: allows to replant with all
+  replant.command.reload:
+    description: Allows /replant reload
     default: op
-    children:
-      - replant.event.replant.hand
-      - replant.event.replant.wooden_hoe
-      - replant.event.replant.stone_hoe
-      - replant.event.replant.iron_hoe
-      - replant.event.replant.golden_hoe
-      - replant.event.replant.diamond_hoe
-      - replant.event.replant.netherite_hoe
-  replant.event.replant.hand:
-    description: allows to replant with hand
+  replant.bypass.worlds:
+    description: Bypass world allow/deny list
     default: op
-  replant.event.replant.hoe:
-    description: allows to replant with all hoe
-    default: op
-    children:
-      - replant.event.replant.wooden_hoe
-      - replant.event.replant.stone_hoe
-      - replant.event.replant.iron_hoe
-      - replant.event.replant.golden_hoe
-      - replant.event.replant.diamond_hoe
-      - replant.event.replant.netherite_hoe
-  replant.event.replant.wooden_hoe:
-    description: allows to replant with wooden hoe
-    default: op
-  replant.event.replant.stone_hoe:
-    description: allows to replant with stone hoe
-    default: op
-  replant.event.replant.iron_hoe:
-    description: allows to replant with iron hoe
-    default: op
-  replant.event.replant.golden_hoe:
-    description: allows to replant with golden hoe
-    default: op
-  replant.event.replant.diamond_hoe:
-    description: allows to replant with diamond hoe
-    default: op
-  replant.event.replant.netherite_hoe:
-    description: allows to replant with netherite hoe
-    default: op
-  replant.event.join.update:
-    description: gets update
+  replant.bypass.regions:
+    description: Bypass region allow/deny list
     default: op

@@ -2,46 +2,63 @@ package org.achymake.replant.events;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
-import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.Collections;
 import java.util.List;
 
-public class PlayerReplantEvent extends Event {
-    private static final HandlerList handlers = new HandlerList();
+public final class PlayerReplantEvent extends Event implements Cancellable {
+
+    private static final HandlerList HANDLERS = new HandlerList();
+
     private final Player player;
     private final Block clickedBlock;
-    private List<ItemStack> drops;
+    private final List<ItemStack> drops;
+
     private boolean cancelled;
+
+    public PlayerReplantEvent(Player player, Block clickedBlock) {
+        this(player, clickedBlock, Collections.emptyList());
+    }
+
     public PlayerReplantEvent(Player player, Block clickedBlock, List<ItemStack> drops) {
         this.player = player;
         this.clickedBlock = clickedBlock;
-        this.drops = drops;
+        this.drops = (drops == null) ? Collections.emptyList() : drops;
     }
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
-    }
-    public boolean isCancelled() {
-        return cancelled;
-    }
+
     public Player getPlayer() {
         return player;
     }
+
     public Block getClickedBlock() {
         return clickedBlock;
     }
+
+    // Legacy support
     public List<ItemStack> getDrops() {
         return drops;
     }
-    public void setDrops(List<ItemStack> drops) {
-        this.drops = drops;
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
     }
-    public @NonNull HandlerList getHandlers() {
-        return handlers;
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.cancelled = cancel;
     }
+
+    @Override
+    public HandlerList getHandlers() {
+        return HANDLERS;
+    }
+
     public static HandlerList getHandlerList() {
-        return handlers;
+        return HANDLERS;
     }
 }

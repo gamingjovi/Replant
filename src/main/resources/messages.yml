@@ -1,0 +1,8 @@
+prefix: "&b&lReplant &7» "
+no-permission: "{prefix}&cYou don't have permission."
+reloaded: "{prefix}&aReloaded configs in &f{ms}&ams."
+info:
+  - "{prefix}&fVersion: &b{version}"
+  - "{prefix}&fWorldGuard hook: &b{worldguard}"
+
+actionbar-replanted: "&aReplanted!"

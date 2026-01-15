@@ -1,121 +1,56 @@
-notify-update: true
+# Replant 2.0 Config
+# This file contains general settings.
+config-version: 2
+
+general:
+  debug: false
+
 replant:
-  # check link below for sounds
-  # "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html"
-  sound: ITEM_SHOVEL_FLATTEN
-  # 'none' to disable checking tool has required enchantment, below for a list of enchantments
-  # "https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html"
-  # if you use custom enchantments they work as well
-  enchantment: none
-  # which world is enabled for replant events
-  worlds:
+  enabled: true
+
+  # Replant happens 1 tick after the crop is broken so vanilla drops/XP happen normally.
+  delay-ticks: 1
+
+  # Only replant when the crop is fully grown (Age == MaxAge)
+  only-fully-grown: true
+
+  # If true, crops that normally need FARMLAND (wheat, carrots, potatoes, beetroot) will only replant when FARMLAND is under the crop.
+  require-farmland-below: true
+
+  # If true, replant even if no seed is consumed (OP mode)
+  free-replant: false
+
+  consume-seed:
+    # Try to consume 1 seed from the block's drops first
+    from-drops: true
+    # If no seed is found in drops, optionally take it from the player's inventory
+    from-inventory-if-needed: false
+
+  tool:
+    allow-hand: true
+    allow-hoe: true
+
+    # Only these hoes count as "hoe" for replant. (Leave empty = any hoe)
+    allowed-hoes:
+      - WOODEN_HOE
+      - STONE_HOE
+      - IRON_HOE
+      - GOLDEN_HOE
+      - DIAMOND_HOE
+      - NETHERITE_HOE
+
+    require-enchantment:
+      enabled: false
+      # Bukkit enchantment keys (examples: MENDING, UNBREAKING, EFFICIENCY)
+      enchantments:
+        - MENDING
+
+worlds:
+  # ALL | WHITELIST | BLACKLIST
+  mode: ALL
+  list:
     - world
-    - world_nether
-    - world_the_end
-    - test
-blocks:
-  MELON:
-    enable: false
-    damage: 1
-    drops:
-      melon:
-        type: MELON
-        fortune-able: false
-        chance: 1.0
-        amount:
-          min: 3
-          max: 7
-  PUMPKIN:
-    enable: false
-    damage: 1
-    drops:
-      pumpkin:
-        type: PUMPKIN
-        fortune-able: false
-        chance: 1.0
-        amount: 1
-  CARROTS:
-    enable: true
-    max-age: 7
-    damage: 1
-    drops:
-      carrot:
-        type: CARROT
-        fortune-able: true
-        chance: 1.0
-        amount:
-          min: 2
-          max: 5
-  POTATOES:
-    enable: true
-    max-age: 7
-    damage: 1
-    drops:
-      potato:
-        type: POTATO
-        fortune-able: true
-        chance: 1.0
-        amount:
-          min: 2
-          max: 5
-      poisonous_potato:
-        type: POISONOUS_POTATO
-        fortune-able: false
-        chance: 0.02
-        amount: 1
-  WHEAT:
-    enable: true
-    max-age: 7
-    damage: 1
-    drops:
-      wheat:
-        type: WHEAT
-        fortune-able: false
-        chance: 1.0
-        amount: 1
-      wheat_seeds:
-        type: WHEAT_SEEDS
-        fortune-able: true
-        chance: 1.0
-        amount:
-          min: 1
-          max: 4
-  BEETROOTS:
-    enable: true
-    max-age: 3
-    damage: 1
-    drops:
-      beetroot:
-        type: BEETROOT
-        fortune-able: false
-        chance: 1.0
-        amount: 1
-      beetroot_seeds:
-        type: BEETROOT_SEEDS
-        fortune-able: true
-        chance: 1.0
-        amount:
-          min: 1
-          max: 4
-  COCOA:
-    enable: true
-    max-age: 2
-    damage: 1
-    drops:
-      cocoa_beans:
-        type: COCOA_BEANS
-        fortune-able: false
-        chance: 1.0
-        amount: 2
-  NETHER_WART:
-    enable: true
-    max-age: 3
-    damage: 1
-    drops:
-      nether_wart:
-        type: NETHER_WART
-        fortune-able: false
-        chance: 1.0
-        amount:
-          min: 2
-          max: 4
+
+messages:
+  # Send a small actionbar message when replant happens
+  actionbar-on-replant: false

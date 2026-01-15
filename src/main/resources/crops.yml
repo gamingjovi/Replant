@@ -1,0 +1,21 @@
+# Replant 2.0 Crop Definitions
+# You can add/remove crops freely.
+# - block: the crop block material
+# - seed: the item consumed for replant (set to AIR to never consume)
+# - required-below: optional: what block must be below to plant (FARMLAND, SOUL_SAND, etc.)
+crops:
+  WHEAT:
+    seed: WHEAT_SEEDS
+    required-below: FARMLAND
+  CARROTS:
+    seed: CARROT
+    required-below: FARMLAND
+  POTATOES:
+    seed: POTATO
+    required-below: FARMLAND
+  BEETROOTS:
+    seed: BEETROOT_SEEDS
+    required-below: FARMLAND
+  NETHER_WART:
+    seed: NETHER_WART
+    required-below: SOUL_SAND

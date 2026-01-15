@@ -1,0 +1,19 @@
+# Replant 2.0 Regions
+regions:
+  enabled: false
+
+  # WORLDGUARD is supported (optional, plugin must be installed)
+  provider: WORLDGUARD
+
+  # WHITELIST: only replant inside listed region IDs
+  # BLACKLIST: replant everywhere EXCEPT inside listed region IDs
+  mode: WHITELIST
+
+  # Region IDs (case-insensitive)
+  list:
+    - farm
+    - spawnfarm
+
+  worldguard:
+    # If true, the player must have build rights at the location (WorldGuard BUILD flag test).
+    respect-build-flag: true
